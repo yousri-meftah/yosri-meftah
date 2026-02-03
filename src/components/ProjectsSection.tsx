@@ -165,8 +165,11 @@ const ProjectsSection = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {applications.map((app, index) => (
-              <motion.div
+              <motion.a
                 key={app.id}
+                href={app.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -202,16 +205,9 @@ const ProjectsSection = () => {
                   )}
 
                   <div className="flex items-center gap-2 mt-auto">
-                    <Button
-                      asChild
-                      variant="ghost"
-                      size="sm"
-                      className="text-muted-foreground hover:text-foreground"
-                    >
-                      <a href={app.url} aria-label={`${app.name} URL`}>
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-                    </Button>
+                    <div className="inline-flex items-center gap-1 text-xs text-secondary font-display opacity-0 group-hover:opacity-100 transition-opacity">
+                      OPEN <ExternalLink className="w-3 h-3" />
+                    </div>
                     {app.credentials?.note && (
                       <span className="ml-auto text-xs text-muted-foreground font-display">
                         {app.credentials.note}
@@ -219,7 +215,7 @@ const ProjectsSection = () => {
                     )}
                   </div>
                 </div>
-              </motion.div>
+              </motion.a>
             ))}
           </div>
         </div>
