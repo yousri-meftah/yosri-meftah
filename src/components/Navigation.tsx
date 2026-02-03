@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Home, Briefcase, Zap, Clock, Mail, Trophy } from 'lucide-react';
+import { portfolio } from '@/data/portfolio';
 
-const navItems = [
-  { id: 'hero', label: 'HOME', icon: Home },
-  { id: 'projects', label: 'PROJECTS', icon: Briefcase },
-  { id: 'skills', label: 'SKILLS', icon: Zap },
-  { id: 'experience', label: 'CAREER', icon: Clock },
-  { id: 'contact', label: 'CONTACT', icon: Mail },
-];
+const iconMap = {
+  home: Home,
+  briefcase: Briefcase,
+  zap: Zap,
+  clock: Clock,
+  mail: Mail,
+} as const;
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,13 +23,13 @@ const Navigation = () => {
       const progress = (window.scrollY / totalHeight) * 100;
       setScrollProgress(progress);
 
-      const sections = navItems.map(item => document.getElementById(item.id));
+      const sections = portfolio.navigation.items.map((item) => document.getElementById(item.id));
       const scrollPosition = window.scrollY + window.innerHeight / 3;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(navItems[i].id);
+          setActiveSection(portfolio.navigation.items[i].id);
           break;
         }
       }
@@ -63,8 +64,8 @@ const Navigation = () => {
           <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-border" />
           
           <div className="relative flex flex-col gap-6">
-            {navItems.map((item, index) => {
-              const Icon = item.icon;
+            {portfolio.navigation.items.map((item, index) => {
+              const Icon = iconMap[item.icon];
               const isActive = activeSection === item.id;
               
               return (
@@ -121,7 +122,7 @@ const Navigation = () => {
         <div className="mt-8 text-center">
           <div className="text-xs font-display text-muted-foreground tracking-wider mb-1">LEVEL</div>
           <div className="font-display text-2xl text-primary text-glow-primary">
-            {navItems.findIndex(item => item.id === activeSection) + 1}
+            {portfolio.navigation.items.findIndex((item) => item.id === activeSection) + 1}
           </div>
         </div>
       </nav>
@@ -136,7 +137,7 @@ const Navigation = () => {
             animate={{ opacity: 1, x: 0 }}
           >
             <Trophy className="w-6 h-6 text-primary" />
-            <span className="font-display text-sm text-foreground">JD</span>
+            <span className="font-display text-sm text-foreground">{portfolio.navigation.mobileLabel}</span>
           </motion.div>
 
           
@@ -183,8 +184,8 @@ const Navigation = () => {
               transition={{ duration: 0.2 }}
               className="absolute top-16 left-0 right-0 bg-card/95 backdrop-blur-lg border border-border rounded-lg overflow-hidden"
             >
-              {navItems.map((item, index) => {
-                const Icon = item.icon;
+              {portfolio.navigation.items.map((item, index) => {
+                const Icon = iconMap[item.icon];
                 const isActive = activeSection === item.id;
                 
                 return (
@@ -194,7 +195,7 @@ const Navigation = () => {
                     className={`
                       w-full flex items-center gap-4 px-6 py-4 transition-colors
                       ${isActive ? 'bg-primary/10 text-primary' : 'text-foreground hover:bg-muted'}
-                      ${index !== navItems.length - 1 ? 'border-b border-border' : ''}
+                      ${index !== portfolio.navigation.items.length - 1 ? 'border-b border-border' : ''}
                     `}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}

@@ -1,116 +1,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Briefcase, Award, MapPin, Calendar, ChevronRight, Flag } from 'lucide-react';
-import { profile } from '@/data/profile';
-import { vulnerabilities } from '@/data/vulnerabilities';
-
-interface Experience {
-  id: number;
-  type: 'work' | 'education' | 'achievement';
-  title: string;
-  company: string;
-  location: string;
-  period: string;
-  description: string;
-  highlights: string[];
-}
-
-const experiences: Experience[] = [
-  {
-    id: 1,
-    type: 'work',
-    title: "Software Development Engineer Intern",
-    company: "Proxym",
-    location: "Sousse, Tunisia",
-    period: "Feb 2024 – Jun 2024",
-    description: "Built a reverse proxy API gateway and frontend interfaces for microservices.",
-    highlights: [
-      "Nginx reverse proxy gateway for microservices",
-      "React + RTK Query UI for smooth data fetching",
-      "Quality gates: ESLint, Husky, SonarQube, Jest",
-    ],
-  },
-  {
-    id: 2,
-    type: 'work',
-    title: "Software Development Engineer Intern",
-    company: "Coding Bi Tounsi",
-    location: "Tunisia",
-    period: "Jun 2024 – Aug 2024",
-    description: "Delivered POS system backend APIs and a responsive React frontend.",
-    highlights: [
-      "Designed ERD and database relationships",
-      "FastAPI + SQLAlchemy with auth + tests",
-      "React UI with routing, state, and validation",
-    ],
-  },
-  {
-    id: 3,
-    type: 'work',
-    title: "Software Development Engineer Intern",
-    company: "RIF",
-    location: "Tunisia",
-    period: "Jun 2025 – Aug 2025",
-    description: "Installed, configured, and maintained Odoo ERP on VPS infrastructure.",
-    highlights: [
-      "IONOS VPS setup with Linux + PostgreSQL",
-      "Automated backups for data protection",
-      "Performance monitoring and uptime checks",
-    ],
-  },
-  {
-    id: 4,
-    type: 'achievement',
-    title: "Security & Competitive Programming",
-    company: "Freelance / Competitive",
-    location: "Remote",
-    period: "2023 – Present",
-    description: "Security research, vulnerability reports, and competitive programming wins.",
-    highlights: [
-      "Critical vuln discovery incl. account takeover",
-      "1000+ LeetCode problems solved",
-      "Purple-rated Codeforces profile",
-    ],
-  },
-  {
-    id: 5,
-    type: 'achievement',
-    title: "Open Source Projects",
-    company: "GitHub",
-    location: "Open Source",
-    period: "2024 – Present",
-    description: "AI Chat, Formula Builder, and Authentication Game.",
-    highlights: [
-      "AI Chat: multi-model integration + token optimization",
-      "Formula Builder: GPA & scientific equation builder",
-      "Authentication Game: passwordless mini-game login",
-    ],
-  },
-  {
-    id: 6,
-    type: 'achievement',
-    title: "Homelab & Self-Hosting",
-    company: "Personal Homelab",
-    location: "Self-Hosted",
-    period: "Ongoing",
-    description: profile.longBio.split('\n')[0].replace(/\s+/g, ' ').trim(),
-    highlights: [
-      "20+ production-grade services",
-      "Reverse proxy & SSL automation",
-      "Monitoring and disaster recovery",
-    ],
-  },
-  {
-    id: 7,
-    type: 'achievement',
-    title: "Vulnerability Reports",
-    company: "Independent",
-    location: "Responsible Disclosure",
-    period: "Aug 2024 – Dec 2024",
-    description: "Identified and reported vulnerabilities across web and cloud systems.",
-    highlights: vulnerabilities.slice(0, 5).map((vuln) => `${vuln.type} — ${vuln.title}`),
-  },
-];
+import { portfolio } from '@/data/portfolio';
 
 const iconMap = {
   work: Briefcase,
@@ -119,7 +10,6 @@ const iconMap = {
 
 const colorMap = {
   work: 'primary',
-  education: 'secondary',
   achievement: 'accent',
 } as const;
 
@@ -172,7 +62,7 @@ const ExperienceSection = () => {
 
           
           <div className="space-y-12">
-            {experiences.map((exp, index) => {
+            {portfolio.journey.map((exp, index) => {
               const Icon = iconMap[exp.type];
               const color = colorMap[exp.type];
               const isLeft = index % 2 === 0;

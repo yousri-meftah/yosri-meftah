@@ -1,26 +1,19 @@
 import { useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Zap, Shield, Cpu, Database, Cloud, Terminal, Wrench, Network, Boxes } from 'lucide-react';
+import { portfolio } from '@/data/portfolio';
 
-interface Skill {
-  name: string;
-  level: number;
-  icon: React.ElementType;
-  category: 'frontend' | 'backend' | 'tools';
-  color: 'primary' | 'secondary' | 'accent';
-}
-
-const skills: Skill[] = [
-  { name: "Python & FastAPI", level: 88, icon: Zap, category: 'backend', color: 'secondary' },
-  { name: "Spring Boot & Java", level: 80, icon: Cpu, category: 'backend', color: 'secondary' },
-  { name: "PostgreSQL & SQL", level: 84, icon: Database, category: 'backend', color: 'secondary' },
-  { name: "Docker & Kubernetes", level: 86, icon: Boxes, category: 'tools', color: 'accent' },
-  { name: "Linux & VPS Admin", level: 82, icon: Terminal, category: 'tools', color: 'accent' },
-  { name: "Nginx & Microservices", level: 83, icon: Network, category: 'tools', color: 'accent' },
-  { name: "React & TypeScript", level: 74, icon: Shield, category: 'frontend', color: 'primary' },
-  { name: "Git & CI/CD (Jenkins)", level: 78, icon: Wrench, category: 'tools', color: 'accent' },
-  { name: "Keycloak & Security", level: 76, icon: Cloud, category: 'tools', color: 'accent' },
-];
+const iconMap = {
+  zap: Zap,
+  shield: Shield,
+  cpu: Cpu,
+  database: Database,
+  cloud: Cloud,
+  terminal: Terminal,
+  wrench: Wrench,
+  network: Network,
+  boxes: Boxes,
+} as const;
 
 const colorClasses = {
   primary: {
@@ -46,11 +39,11 @@ const colorClasses = {
   },
 };
 
-const SkillBar = ({ skill, index }: { skill: Skill; index: number }) => {
+const SkillBar = ({ skill, index }: { skill: (typeof portfolio.skills)[number]; index: number }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   const colors = colorClasses[skill.color];
-  const Icon = skill.icon;
+  const Icon = iconMap[skill.icon];
 
   return (
     <motion.div
@@ -150,7 +143,7 @@ const SkillsSection = () => {
           className="grid grid-cols-3 gap-4 max-w-2xl mx-auto mb-16"
         >
           {categories.map((cat) => {
-            const catSkills = skills.filter(s => s.category === cat.id);
+            const catSkills = portfolio.skills.filter((s) => s.category === cat.id);
             const avgLevel = Math.round(catSkills.reduce((acc, s) => acc + s.level, 0) / catSkills.length);
             const colors = colorClasses[cat.color];
             
@@ -169,7 +162,7 @@ const SkillsSection = () => {
 
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {skills.map((skill, index) => (
+          {portfolio.skills.map((skill, index) => (
             <SkillBar key={skill.name} skill={skill} index={index} />
           ))}
         </div>

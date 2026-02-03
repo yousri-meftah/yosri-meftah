@@ -5,12 +5,19 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { profile } from '@/data/profile';
+import { portfolio } from '@/data/portfolio';
 
-const socialLinks = [
-  profile.social.github ? { icon: Github, href: profile.social.github, label: 'GitHub' } : null,
-  profile.social.linkedin ? { icon: Linkedin, href: profile.social.linkedin, label: 'LinkedIn' } : null,
-].filter(Boolean) as Array<{ icon: typeof Github; href: string; label: string }>;
+const socialLinks = portfolio.contact.social
+  .map((link) => {
+    if (link.key === 'github') {
+      return { icon: Github, href: link.href, label: link.label };
+    }
+    if (link.key === 'linkedin') {
+      return { icon: Linkedin, href: link.href, label: link.label };
+    }
+    return null;
+  })
+  .filter(Boolean) as Array<{ icon: typeof Github; href: string; label: string }>;
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -26,6 +33,8 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     const webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL as string | undefined;
+    const headerName = (import.meta.env.VITE_N8N_WEBHOOK_HEADER_NAME as string | undefined) ;
+    const headerValue = (import.meta.env.VITE_N8N_WEBHOOK_HEADER_VALUE as string | undefined) ;
     if (!webhookUrl) {
       toast({
         title: "Webhook not configured",
@@ -38,7 +47,10 @@ const ContactSection = () => {
     try {
       const response = await fetch(webhookUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          [headerName]: headerValue,
+        },
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
@@ -111,8 +123,8 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <div className="font-display text-xs text-muted-foreground tracking-wider mb-1">EMAIL</div>
-                  <a href={`mailto:${profile.social.email}`} className="text-foreground hover:text-primary transition-colors">
-                    {profile.social.email}
+                  <a href={`mailto:${portfolio.contact.email}`} className="text-foreground hover:text-primary transition-colors">
+                    {portfolio.contact.email}
                   </a>
                 </div>
               </div>
@@ -123,7 +135,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <div className="font-display text-xs text-muted-foreground tracking-wider mb-1">FOCUS</div>
-                  <span className="text-foreground">{profile.tagline}</span>
+                  <span className="text-foreground">{portfolio.profile.tagline}</span>
                 </div>
               </div>
 
@@ -134,7 +146,7 @@ const ContactSection = () => {
                 <div>
                   <div className="font-display text-xs text-muted-foreground tracking-wider mb-1">INTERESTS</div>
                   <span className="text-foreground">
-                    {profile.interests.slice(0, 2).join(' · ')}
+                    {portfolio.profile.interests.slice(0, 2).join(' · ')}
                   </span>
                 </div>
               </div>

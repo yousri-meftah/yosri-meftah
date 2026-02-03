@@ -1,16 +1,19 @@
 import { motion } from 'framer-motion';
 import { ChevronDown, Gamepad2, Code, Rocket } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { profile } from '@/data/profile';
-import { projects } from '@/data/projects';
-import { applications } from '@/data/applications';
+import { portfolio } from '@/data/portfolio';
 
 const HeroSection = () => {
   const scrollToProjects = () => {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
-  const [firstName, ...restName] = profile.name.split(' ');
+  const [firstName, ...restName] = portfolio.profile.name.split(' ');
   const lastName = restName.join(' ');
+  const statIcons = {
+    projects: Code,
+    services: Rocket,
+    automation: Gamepad2,
+  } as const;
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -139,7 +142,7 @@ const HeroSection = () => {
             >
               <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-primary" />
               <p className="font-display text-lg md:text-xl text-muted-foreground tracking-wide">
-                {profile.role.toUpperCase()}
+                {portfolio.profile.role.toUpperCase()}
               </p>
               <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-secondary" />
             </motion.div>
@@ -151,7 +154,7 @@ const HeroSection = () => {
               className="mx-auto max-w-4xl mb-8"
             >
               <div className="border-2 border-accent/70 bg-accent/10 text-foreground rounded-xl px-6 py-4 font-display text-base md:text-lg tracking-wide">
-                NOTE: This frontend does not reflect my frontend skills. It was made with Lovable. If you're looking for a frontend dev, I may not be the best fit.
+                {portfolio.hero.note}
               </div>
             </motion.div>
 
@@ -162,24 +165,30 @@ const HeroSection = () => {
               transition={{ delay: 0.8 }}
               className="flex flex-wrap justify-center gap-6 md:gap-12 mb-10"
             >
-              <div className="flex items-center gap-2">
-                <Code className="w-5 h-5 text-primary" />
-                <span className="font-display text-sm text-muted-foreground">
-                  <span className="text-primary text-lg font-bold">{projects.length}</span> PROJECTS
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Rocket className="w-5 h-5 text-secondary" />
-                <span className="font-display text-sm text-muted-foreground">
-                  <span className="text-secondary text-lg font-bold">{applications.length}+</span> SERVICES
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Gamepad2 className="w-5 h-5 text-accent" />
-                <span className="font-display text-sm text-muted-foreground">
-                  <span className="text-accent text-lg font-bold">∞</span> AUTOMATION
-                </span>
-              </div>
+              {portfolio.hero.stats.map((stat) => {
+                const Icon = statIcons[stat.id as keyof typeof statIcons] ?? Code;
+                const value =
+                  stat.value ??
+                  (stat.id === 'projects'
+                    ? String(portfolio.projects.length)
+                    : stat.id === 'services'
+                      ? `${portfolio.services.length}+`
+                      : '');
+                const colorClass =
+                  stat.id === 'projects'
+                    ? 'text-primary'
+                    : stat.id === 'services'
+                      ? 'text-secondary'
+                      : 'text-accent';
+                return (
+                  <div key={stat.id} className="flex items-center gap-2">
+                    <Icon className={`w-5 h-5 ${colorClass}`} />
+                    <span className="font-display text-sm text-muted-foreground">
+                      <span className={`${colorClass} text-lg font-bold`}>{value}</span> {stat.label}
+                    </span>
+                  </div>
+                );
+              })}
             </motion.div>
 
             

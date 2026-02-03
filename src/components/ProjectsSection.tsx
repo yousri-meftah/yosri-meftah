@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, ChevronRight, Gamepad, Server } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { projects } from '@/data/projects';
-import { applications } from '@/data/applications';
+import { portfolio } from '@/data/portfolio';
 
 const ProjectsSection = () => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -45,7 +44,7 @@ const ProjectsSection = () => {
           </h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
+          {portfolio.projects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 30 }}
@@ -164,7 +163,7 @@ const ProjectsSection = () => {
             </h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {applications.map((app, index) => (
+            {portfolio.services.map((app, index) => (
               <motion.a
                 key={app.id}
                 href={app.url}
@@ -208,9 +207,9 @@ const ProjectsSection = () => {
                     <div className="inline-flex items-center gap-1 text-xs text-secondary font-display opacity-0 group-hover:opacity-100 transition-opacity">
                       OPEN <ExternalLink className="w-3 h-3" />
                     </div>
-                    {app.credentials?.note && (
+                    {app.note && (
                       <span className="ml-auto text-xs text-muted-foreground font-display">
-                        {app.credentials.note}
+                        {app.note}
                       </span>
                     )}
                   </div>

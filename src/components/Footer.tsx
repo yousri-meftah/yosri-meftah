@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Heart, Trophy, Coffee, Code } from 'lucide-react';
-import { profile } from '@/data/profile';
+import { portfolio } from '@/data/portfolio';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -23,7 +23,7 @@ const Footer = () => {
             </motion.div>
             <div>
               <div className="font-display text-sm text-foreground tracking-wider">
-                {profile.name.toUpperCase()}
+                {portfolio.profile.name.toUpperCase()}
               </div>
               <div className="text-xs text-muted-foreground">© {currentYear} All rights reserved</div>
             </div>
