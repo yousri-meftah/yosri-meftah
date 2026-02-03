@@ -16,7 +16,7 @@ const HeroSection = () => {
   } as const;
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-start md:items-center justify-center pt-24 md:pt-0 overflow-hidden">
       
       <div className="absolute inset-0 grid-pattern opacity-50" />
       
@@ -87,7 +87,7 @@ const HeroSection = () => {
       </div>
 
       
-      <div className="relative z-10 container mx-auto px-6 text-center">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 text-center">
         
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -127,7 +127,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="font-display text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
+              className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
             >
               <span className="text-foreground">{firstName?.toUpperCase()}</span>
               <span className="text-gradient-neon ml-4">{lastName.toUpperCase()}</span>
@@ -138,10 +138,10 @@ const HeroSection = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="flex items-center justify-center gap-4 mb-8"
+              className="flex items-center justify-center gap-4 mb-6"
             >
               <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-primary" />
-              <p className="font-display text-lg md:text-xl text-muted-foreground tracking-wide">
+              <p className="font-display text-base sm:text-lg md:text-xl text-muted-foreground tracking-wide">
                 {portfolio.profile.role.toUpperCase()}
               </p>
               <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-secondary" />
@@ -151,9 +151,9 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="mx-auto max-w-4xl mb-8"
+              className="mx-auto max-w-2xl md:max-w-4xl mb-6"
             >
-              <div className="border-2 border-accent/70 bg-accent/10 text-foreground rounded-xl px-6 py-4 font-display text-base md:text-lg tracking-wide">
+              <div className="border-2 border-accent/70 bg-accent/10 text-foreground rounded-xl px-4 py-3 sm:px-6 sm:py-4 font-display text-sm sm:text-base md:text-lg tracking-wide">
                 {portfolio.hero.note}
               </div>
             </motion.div>
@@ -163,7 +163,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
-              className="flex flex-wrap justify-center gap-6 md:gap-12 mb-10"
+              className="grid grid-cols-2 gap-4 sm:flex sm:flex-wrap sm:justify-center sm:gap-6 md:gap-12 mb-8"
             >
               {portfolio.hero.stats.map((stat) => {
                 const Icon = statIcons[stat.id as keyof typeof statIcons] ?? Code;
@@ -181,7 +181,12 @@ const HeroSection = () => {
                       ? 'text-secondary'
                       : 'text-accent';
                 return (
-                  <div key={stat.id} className="flex items-center gap-2">
+                  <div
+                    key={stat.id}
+                    className={`flex items-center gap-2 ${
+                      stat.id === 'automation' ? 'col-span-2 justify-center' : ''
+                    }`}
+                  >
                     <Icon className={`w-5 h-5 ${colorClass}`} />
                     <span className="font-display text-sm text-muted-foreground">
                       <span className={`${colorClass} text-lg font-bold`}>{value}</span> {stat.label}

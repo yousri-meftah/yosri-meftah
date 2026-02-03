@@ -5,6 +5,7 @@ const CustomCursor = () => {
   const [isPointer, setIsPointer] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+  const [isEnabled, setIsEnabled] = useState(true);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -17,6 +18,11 @@ const CustomCursor = () => {
   const glowSpringY = useSpring(glowY, { stiffness: 140, damping: 18, mass: 0.9 });
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(pointer: fine)');
+    const updateEnabled = () => setIsEnabled(mediaQuery.matches);
+    updateEnabled();
+    mediaQuery.addEventListener('change', updateEnabled);
+
     const updatePosition = (e: MouseEvent) => {
       const nextX = e.clientX - 16;
       const nextY = e.clientY - 16;
@@ -44,12 +50,17 @@ const CustomCursor = () => {
     window.addEventListener('mouseup', handleMouseUp);
 
     return () => {
+      mediaQuery.removeEventListener('change', updateEnabled);
       window.removeEventListener('mousemove', updatePosition);
       window.removeEventListener('mouseover', updateCursorType);
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
     };
   }, [glowX, glowY, x, y]);
+
+  if (!isEnabled) {
+    return null;
+  }
 
   return (
     <>

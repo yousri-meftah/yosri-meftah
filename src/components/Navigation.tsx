@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Home, Briefcase, Zap, Clock, Mail, Trophy } from 'lucide-react';
 import { portfolio } from '@/data/portfolio';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const iconMap = {
   home: Home,
@@ -49,6 +50,9 @@ const Navigation = () => {
 
   return (
     <>
+      <div className="fixed top-4 right-4 z-50 hidden lg:block">
+        <ThemeToggle />
+      </div>
       
       <div className="fixed top-0 left-0 right-0 h-1 z-50 bg-muted">
         <motion.div
@@ -129,7 +133,7 @@ const Navigation = () => {
 
       
       <div className="fixed top-4 left-4 right-4 z-50 lg:hidden">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-3">
           
           <motion.div 
             className="flex items-center gap-2"
@@ -140,38 +144,43 @@ const Navigation = () => {
             <span className="font-display text-sm text-foreground">{portfolio.navigation.mobileLabel}</span>
           </motion.div>
 
-          
-          <motion.button
-            onClick={() => setIsOpen(!isOpen)}
-            className="relative w-12 h-12 bg-card border border-border rounded-lg flex items-center justify-center"
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-          >
-            <AnimatePresence mode="wait">
-              {isOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="w-5 h-5 text-primary" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu className="w-5 h-5 text-foreground" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
+          <div className="flex items-center gap-2">
+            <div className="scale-90">
+              <ThemeToggle />
+            </div>
+
+            <motion.button
+              onClick={() => setIsOpen(!isOpen)}
+              className="relative w-12 h-12 bg-card border border-border rounded-lg flex items-center justify-center"
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+            >
+              <AnimatePresence mode="wait">
+                {isOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X className="w-5 h-5 text-primary" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu className="w-5 h-5 text-foreground" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
+          </div>
         </div>
 
         
