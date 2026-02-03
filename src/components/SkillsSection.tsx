@@ -11,15 +11,15 @@ interface Skill {
 }
 
 const skills: Skill[] = [
-  { name: "Docker & Containers", level: 92, icon: Boxes, category: 'tools', color: 'accent' },
-  { name: "Linux & Bash", level: 88, icon: Terminal, category: 'tools', color: 'accent' },
-  { name: "Cloudflare & Tunnels", level: 82, icon: Cloud, category: 'tools', color: 'accent' },
-  { name: "Nginx & Traefik", level: 86, icon: Network, category: 'tools', color: 'accent' },
-  { name: "FastAPI & Python", level: 84, icon: Zap, category: 'backend', color: 'secondary' },
-  { name: "Spring Boot", level: 78, icon: Cpu, category: 'backend', color: 'secondary' },
-  { name: "PostgreSQL", level: 83, icon: Database, category: 'backend', color: 'secondary' },
-  { name: "Terraform & Ansible", level: 80, icon: Wrench, category: 'tools', color: 'accent' },
-  { name: "React & TypeScript", level: 72, icon: Shield, category: 'frontend', color: 'primary' },
+  { name: "Python & FastAPI", level: 88, icon: Zap, category: 'backend', color: 'secondary' },
+  { name: "Spring Boot & Java", level: 80, icon: Cpu, category: 'backend', color: 'secondary' },
+  { name: "PostgreSQL & SQL", level: 84, icon: Database, category: 'backend', color: 'secondary' },
+  { name: "Docker & Kubernetes", level: 86, icon: Boxes, category: 'tools', color: 'accent' },
+  { name: "Linux & VPS Admin", level: 82, icon: Terminal, category: 'tools', color: 'accent' },
+  { name: "Nginx & Microservices", level: 83, icon: Network, category: 'tools', color: 'accent' },
+  { name: "React & TypeScript", level: 74, icon: Shield, category: 'frontend', color: 'primary' },
+  { name: "Git & CI/CD (Jenkins)", level: 78, icon: Wrench, category: 'tools', color: 'accent' },
+  { name: "Keycloak & Security", level: 76, icon: Cloud, category: 'tools', color: 'accent' },
 ];
 
 const colorClasses = {

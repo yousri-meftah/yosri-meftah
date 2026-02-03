@@ -150,6 +150,12 @@ const ContactSection = () => {
                     <motion.a
                       key={social.label}
                       href={social.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        window.open(social.href, '_blank', 'noopener,noreferrer');
+                      }}
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.95 }}
                       className="w-12 h-12 rounded-lg bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
