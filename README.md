@@ -46,41 +46,11 @@ Notes:
 - shadcn-ui
 - Tailwind CSS
 
-## Frontend folder structure
+## Frontend folder structure (pattern)
 
-```
-./src
-./src/App.css
-./src/App.tsx
-./src/components
-./src/components/ContactSection.tsx
-./src/components/CustomCursor.tsx
-./src/components/ExperienceSection.tsx
-./src/components/Footer.tsx
-./src/components/HeroSection.tsx
-./src/components/KonamiCode.tsx
-./src/components/Navigation.tsx
-./src/components/NavLink.tsx
-./src/components/ProjectsSection.tsx
-./src/components/SkillsSection.tsx
-./src/components/theme-provider.tsx
-./src/components/ThemeToggle.tsx
-./src/components/ui
-./src/data
-./src/data/blog.ts
-./src/data/portfolio.ts
-./src/hooks
-./src/hooks/use-mobile.tsx
-./src/hooks/use-toast.ts
-./src/index.css
-./src/lib
-./src/lib/utils.ts
-./src/main.tsx
-./src/pages
-./src/pages/Index.tsx
-./src/pages/NotFound.tsx
-./src/test
-./src/test/example.test.ts
-./src/test/setup.ts
-./src/vite-env.d.ts
-```
+- `src/components/` — feature/UI sections are broken into their own components (single‑responsibility).
+- `src/components/ui/` — reusable UI primitives (buttons, inputs, etc.).
+- `src/data/` — all content/data lives here (single source of truth).
+- `src/hooks/` — shared hooks.
+- `src/lib/` — shared utilities.
+- `src/pages/` — single‑page app, only `Index.tsx` (home).
