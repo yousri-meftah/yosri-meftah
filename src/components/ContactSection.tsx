@@ -176,11 +176,6 @@ const ContactSection = () => {
             </div>
 
             
-            <div className="p-4 bg-muted/50 rounded-xl border border-dashed border-border">
-              <p className="text-xs text-muted-foreground font-display tracking-wider">
-                💡 PRO TIP: Press the Konami code for a surprise...
-              </p>
-            </div>
           </motion.div>
 
           

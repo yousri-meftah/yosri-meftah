@@ -3,9 +3,11 @@ import { motion } from 'framer-motion';
 import { ExternalLink, Github, ChevronRight, Gamepad, Server } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { portfolio } from '@/data/portfolio';
+import { useToast } from '@/hooks/use-toast';
 
 const ProjectsSection = () => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const { toast } = useToast();
 
   return (
     <section id="projects" className="relative py-24 overflow-hidden">
@@ -53,6 +55,15 @@ const ProjectsSection = () => {
               transition={{ delay: index * 0.1 }}
               onMouseEnter={() => setHoveredId(project.id)}
               onMouseLeave={() => setHoveredId(null)}
+              onClick={() => {
+                if (!project.githubUrl && !project.liveUrl) {
+                  toast({
+                    title: "Project not public yet",
+                    description:
+                      "This project is fully cleaned up and will be available as soon as it is perfect enough to be online and hosted with complete documentation.",
+                  });
+                }
+              }}
               className="group relative"
             >
               <div
@@ -219,17 +230,6 @@ const ProjectsSection = () => {
           </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <Button variant="arcadeOutline" size="lg">
-            SEE MORE
-            <ChevronRight className="w-4 h-4" />
-          </Button>
-        </motion.div>
       </div>
     </section>
   );

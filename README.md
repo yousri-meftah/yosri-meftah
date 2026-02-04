@@ -38,6 +38,10 @@ Notes:
 - You can discover the n8n endpoint via DevTools Network, so it’s fine to document it here.
 - The custom header is for demonstration only. The workflow only accepts requests from my domain, so it’s not intended to be a spam vector.
 
+## Demo video
+
+<video src="public/demo_video.mp4" controls playsinline></video>
+
 ## Tech stack
 
 - Vite
