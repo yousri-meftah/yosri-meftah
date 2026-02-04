@@ -17,7 +17,10 @@ npm run dev
 
 The contact form posts to an n8n webhook, which then sends notifications and responds to the request.
 
-Workflow summary (see `public/n8n.PNG`):
+Workflow summary:
+
+![n8n workflow](public/n8n.PNG)
+
 1. **Webhook** — Receives the form submission (POST).
 2. **Send a message (Slack)** — Sends a message to Slack.
 3. **Send a message (Gmail)** — Sends an email.
