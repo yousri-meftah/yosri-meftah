@@ -40,7 +40,9 @@ Notes:
 
 ## Demo video
 
-<video src="public/demo_video.mp4" controls playsinline></video>
+GitHub READMEs don’t render video tags. Use the direct link:
+
+[Watch the demo](public/demo_video.mp4)
 
 ## Tech stack
 
