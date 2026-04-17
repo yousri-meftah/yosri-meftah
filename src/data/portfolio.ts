@@ -12,7 +12,7 @@ export type SkillIconKey =
   | 'cloud';
 
 export type SocialLinkKey = 'github' | 'linkedin';
-export type NavIconKey = 'home' | 'briefcase' | 'zap' | 'clock' | 'mail';
+export type NavIconKey = 'home' | 'trophy' | 'briefcase' | 'zap' | 'clock' | 'mail';
 
 export interface SocialLink {
   key: SocialLinkKey;
@@ -106,6 +106,7 @@ export const portfolio = {
     mobileLabel: 'YM',
     items: [
       { id: 'hero', label: 'HOME', icon: 'home' },
+      { id: 'highlights', label: 'HIGHLIGHTS', icon: 'trophy' },
       { id: 'projects', label: 'PROJECTS', icon: 'briefcase' },
       { id: 'skills', label: 'SKILLS', icon: 'zap' },
       { id: 'experience', label: 'CAREER', icon: 'clock' },
@@ -121,14 +122,16 @@ export const portfolio = {
       longDescription:
         'Built a reverse proxy API gateway using Nginx to orchestrate communication between microservices, with secure routing and service-aware configuration.',
       technologies: ['Nginx', 'Spring Boot', 'Docker', 'Keycloak', 'React', 'RTK Query', 'Git'],
+      githubUrl: 'https://github.com/yousri-meftah/bankerise',
       featured: true,
     },
     {
       id: 'odoo-erp-deployment',
-      title: 'Odoo ERP Deployment',
+      title: 'Codemaster',
       description:
-        'Installed and hosted Odoo ERP on an IONOS VPS with PostgreSQL and automated backups.',
-      technologies: ['Linux', 'Odoo', 'PostgreSQL', 'VPS Administration'],
+        'Coding practice platform for sharpening problem-solving skills through structured challenges.',
+      technologies: ['React', 'TypeScript', 'Problem Solving', 'Algorithms'],
+      liveUrl: 'https://codemaster.yousri-meftah.com/',
     },
     {
       id: 'pos-system',
@@ -136,24 +139,28 @@ export const portfolio = {
       description:
         'Designed ERD, built FastAPI backend with secure auth, and a React + TypeScript frontend.',
       technologies: ['FastAPI', 'React', 'TypeScript', 'PostgreSQL', 'SQLAlchemy', 'Git'],
+      githubUrl: 'https://github.com/yousri-meftah/Pointofsale_Backend',
     },
     {
       id: 'ai-chat',
       title: 'AI Chat',
       description: 'ChatGPT-like chatbot integrating multiple AI models with token optimization.',
       technologies: ['React', 'TypeScript', 'FastAPI'],
+      githubUrl: 'https://github.com/yousri-meftah/ai-chat',
     },
     {
       id: 'formula-builder',
       title: 'Formula Builder',
       description: 'Dynamic formula-building platform for GPA and scientific equations.',
       technologies: ['FastAPI', 'React', 'PostgreSQL'],
+      githubUrl: 'https://github.com/yousri-meftah/FormulaBuilder',
     },
     {
       id: 'authentication-game',
       title: 'Authentication Game',
       description: 'Interactive mini-games for secure, memorable authentication.',
       technologies: ['React', 'Node.js'],
+      githubUrl: 'https://github.com/yousri-meftah/authentication_game',
     },
   ] satisfies Project[],
   services: [

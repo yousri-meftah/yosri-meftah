@@ -4,6 +4,7 @@ import HeroSection from '@/components/HeroSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import SkillsSection from '@/components/SkillsSection';
 import ExperienceSection from '@/components/ExperienceSection';
+import HighlightsSection from '@/components/HighlightsSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import KonamiCode from '@/components/KonamiCode';
@@ -24,6 +25,7 @@ const Index = () => {
           <div id="hero">
             <HeroSection />
           </div>
+          <HighlightsSection />
           <ProjectsSection />
           <SkillsSection />
           <ExperienceSection />

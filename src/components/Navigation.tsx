@@ -6,6 +6,7 @@ import ThemeToggle from '@/components/ThemeToggle';
 
 const iconMap = {
   home: Home,
+  trophy: Trophy,
   briefcase: Briefcase,
   zap: Zap,
   clock: Clock,

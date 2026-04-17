@@ -56,7 +56,11 @@ const ProjectsSection = () => {
               onMouseEnter={() => setHoveredId(project.id)}
               onMouseLeave={() => setHoveredId(null)}
               onClick={() => {
-                if (!project.githubUrl && !project.liveUrl) {
+                const projectUrl = project.liveUrl ?? project.githubUrl;
+
+                if (projectUrl) {
+                  window.open(projectUrl, '_blank', 'noopener,noreferrer');
+                } else {
                   toast({
                     title: "Project not public yet",
                     description:
@@ -64,7 +68,7 @@ const ProjectsSection = () => {
                   });
                 }
               }}
-              className="group relative"
+              className="group relative cursor-pointer"
             >
               <div
                 className={`
